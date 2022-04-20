@@ -1,5 +1,3 @@
-from cgi import test
-from urllib import response
 import unittest
 from app import app
 
