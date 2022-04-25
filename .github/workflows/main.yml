@@ -52,10 +52,16 @@ jobs:
     needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "halliday-ryer-cicd" #Must be unique in Heroku
-          heroku_email: "drek@riseup.net"
-   
+    - uses: actions/checkout@v3
+    - name: Login to Heroku Container registry
+      env: 
+        HEROKU_API_KEY: ${{ secrets.API_KEY }}
+      run: heroku container:login 
+    - name: Build and push
+      env:
+        HEROKU_API_KEY: ${{ secrets.API_KEY }}
+      run: heroku container:push -a halliday-ryer-cicd web 
+    - name: Release
+      env:
+        HEROKU_API_KEY: ${{ secrets.API_KEY }}
+      run: heroku container:release -a halliday-ryer-cicd web 
