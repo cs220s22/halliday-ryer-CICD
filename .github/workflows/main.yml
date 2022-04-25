@@ -52,11 +52,12 @@ jobs:
     needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Deploy to Heroku
+    - uses: actions/checkout@v3
+    - name: Login to Heroku
+      env: 
+        HEROKU_API_KEY: ${{ secrets.API_KEY }}
+      run: heroku container:login
+    - name: Deploy
       env:
-        HEROKU_API_TOKEN: ${{ secrets.API_TOKEN }}
-        HEROKU_APP_NAME: "halliday-ryer-cicd"
-      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/main:main
+        HEROKU_API_KEY: ${{ secrets.API_KEY }}
+      run: heroku container:push -a halliday-ryer-cicd main 
