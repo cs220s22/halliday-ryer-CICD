@@ -58,5 +58,5 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.API_KEY }}
       run: heroku container:login
     - name: Deploy
-      run: git push https://heroku:${{secrets.API_KEY}}@git.heroku.com/halliday-ryer-cicd.git origin/main:main
+      run: git push https://heroku:${{secrets.API_KEY}}@git.heroku.com/halliday-ryer-cicd.git refs/remotes/origin/main:refs/heads/main
 
