@@ -59,6 +59,6 @@ jobs:
       run: heroku container:login
     - name: Deploy
       run: |
-        git fetch --all --unshallow 
+        git fetch --all --unshallow https://git.heroku.com/halliday-ryer-cicd.git
         git push https://heroku:${{secrets.API_KEY}}@git.heroku.com/halliday-ryer-cicd.git refs/remotes/origin/main:refs/heads/main
 
