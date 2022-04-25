@@ -60,4 +60,4 @@ jobs:
     - name: Deploy
       env:
         HEROKU_API_KEY: ${{ secrets.API_KEY }}
-      run: heroku container:push -a halliday-ryer-cicd main 
+      run: heroku container:push -a halliday-ryer-cicd web
